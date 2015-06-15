@@ -1,8 +1,8 @@
 {
   "name": "hapi-next",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Hapi js wrapper for calling function using next() in express.js style",
-  "main": "index.js",
+  "main": "pakmanaged.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
     "async": "^0.9.0",
     "boom": "^2.7.0"
   },
+  "readme" : "README.md",
   "keywords": [
     "next",
     "hapijs"
