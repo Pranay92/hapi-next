@@ -1,6 +1,6 @@
 {
   "name": "hapi-next",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hapi js wrapper for calling function using next() in express.js style",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,10 @@
     "next",
     "hapijs"
   ],
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Pranay92/hapi-next.git"
+  },
   "author": "Pranay Dubey <pranaydubey3009@gmail.com> (https://github.com/Pranay92)",
   "license": "MIT"
 }
