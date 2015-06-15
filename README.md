@@ -1,4 +1,9 @@
 # hapi-next
+
+Install via **npm**
+
+`npm install hapi-next`
+
 Module that allows to inject next() in your route handler
 
 Consider the following route handler in hapi:
