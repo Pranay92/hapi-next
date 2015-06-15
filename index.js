@@ -4,13 +4,14 @@ var async = require('async'),
 
 function Series(arr) {
 	this.arr = arr;
+	Validate(arr);
 }
 
 function Validate(arr) {
 	var len = arr.length;
 	while(len--) {
 		if(typeof arr[len] !== 'function') {
-			throw new Error('')
+			throw new Error('Arguments passed in hapi-next must be functions');
 		}
 	}
 }
