@@ -1,0 +1,19 @@
+{
+  "name": "hapi-next",
+  "version": "0.0.1",
+  "description": "Hapi js wrapper for calling function using next() in express.js style",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies" : {
+    "async": "^0.9.0",
+    "boom": "^2.7.0"
+  },
+  "keywords": [
+    "next",
+    "hapijs"
+  ],
+  "author": "Pranay Dubey <pranaydubey3009@gmail.com> (https://github.com/Pranay92)",
+  "license": "MIT"
+}
