@@ -42,15 +42,16 @@ someFunc : function(request,reply) {
 
 We have the following problem in the above:
 
-1. Violation of SRP.
+1. Violation of **SRP**.
 
 2. Code gets complex over time. 
 
 3. Changing of any function requires checking the whole handler function invocation again.
 
-4. No default error/response sending mechanism. Each function has to explicitly send error/response.
+4. **No default** error/response sending mechanism. Each function has to explicitly send error/response.
 
-What we can do about it?
+
+# What we can do about it?
 
 Frameworks like *Express.JS* have a beautiful feature called **next()** that allows user to invoke functions in any order and completely independent of each other. While this feature is a part of ExpressJS, this can also be implemented as a separate npm module using **hapi-next**
 
