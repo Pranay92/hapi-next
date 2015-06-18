@@ -61,7 +61,12 @@ We have the following problem in the above:
 Frameworks like *Express.JS* have a beautiful feature called **next()** that allows user to invoke functions in any order and completely independent of each other. While this feature is a part of ExpressJS, this can also be implemented as a separate npm module using **hapi-next**
 
 
-Now consider the above same example but using **hapi-next** this time:
+**hapi-next** can be used in two ways
+
+1. As a series of independent functions using **callbacks**
+2. As a series of independent functions using **promises**
+
+# hapi-next using callbacks:
 
 Require `hapi-next`
 ```
@@ -85,7 +90,7 @@ handler : function(request,reply) {
 
 ```
 
-and your functions now look like
+your functions:
 
 ```
 function validate(request,reply,next) {
@@ -105,3 +110,58 @@ function someFuncToGetData(request,reply,next) {
   });
 }
 ```
+
+# hapi-next using promises
+
+your handler:
+
+```
+handler : function(request,reply) {
+    
+    var funcArray = [
+      validator.validate,
+      controller.someFuncToGetData,
+      controller.processSomeData
+    ];
+    
+    var series = new Series(funcArray);
+    series.promise(request,reply);
+}
+
+```
+your functions:
+
+```
+function validate(request,reply) {
+
+  // do some validtion here
+  var defer = Promise.defer(); // use any promise library like blue-bird
+  
+  //do some validation here 
+  // do defer.resolve() inside any async operation
+  
+  return defer.promise;
+}
+
+function someFuncToGetData(request,reply) {
+
+  var defer = Promise.defer();
+
+  db.queryAsync(request.query,function(err,data) {
+    
+    if(err) {
+      return defer.reject(err); 
+    }
+    
+    reply.data = data;
+    
+    defer.resolve();
+
+  });
+  
+  return defer.promise;
+}
+```
+
+
+
