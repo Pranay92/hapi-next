@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "description": "Example for demostrating hapi-next",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.30",
+    "hapi": "^8.6.1",
+    "hapi-next": "^0.1.1",
+    "joi": "^6.4.3"
+  },
+  "keywords": [
+    "next",
+    "hapijs"
+  ],
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pranay92/hapi-next.git"
+  },
+  "author": "Pranay Dubey <pranaydubey3009@gmail.com> (https://github.com/Pranay92)",
+  "license": "MIT"
+}
