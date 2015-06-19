@@ -79,7 +79,10 @@ Series.prototype.promise = function(request,reply) {
 				return cb();
 			}
 
-			currCall.then(function() {
+			currCall.then(function(data) {
+				if(data) {
+					reply.data = data;	
+				}
 				cb();
 			})
 			.catch(function(e) {

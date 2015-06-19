@@ -13,8 +13,7 @@ function PromiseGet(request,reply) {
 	var defer = Promise.defer();
 
 	setTimeout(function() {
-		reply.data = users;
-		defer.resolve();
+		defer.resolve(users);
 	},500);
 
 	return defer.promise;

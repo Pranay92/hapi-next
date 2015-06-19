@@ -138,7 +138,7 @@ function validate(request,reply) {
   var defer = Promise.defer(); // use any promise library like blue-bird
   
   //do some validation here 
-  // do defer.resolve() inside any async operation
+  // do defer.resolve(data) inside any async operation
   
   return defer.promise;
 }
@@ -153,9 +153,7 @@ function someFuncToGetData(request,reply) {
       return defer.reject(err); 
     }
     
-    reply.data = data;
-    
-    defer.resolve();
+    defer.resolve(data);
 
   });
   
