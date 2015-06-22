@@ -1,10 +1,10 @@
-# hapi-next
+# hapi-next   [![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next)
 
 Install via **npm**
 
 `npm install hapi-next`
 
-[![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next)
+
 
 Module that allows to inject next() in your route handler
 
