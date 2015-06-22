@@ -4,6 +4,8 @@ Install via **npm**
 
 `npm install hapi-next`
 
+https://travis-ci.org/Pranay92/hapi-next.svg?branch=master
+
 Module that allows to inject next() in your route handler
 
 Consider the following route handler in hapi:
