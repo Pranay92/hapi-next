@@ -47,6 +47,7 @@ Series.prototype.execute = function(request,reply) {
 		
 		if(err) {
 			reply(boom.badData(err));
+			return;
 		}
 
 		reply.data = reply.data || defaultData;
