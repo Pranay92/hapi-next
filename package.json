@@ -4,9 +4,9 @@
   "description": "Hapi js wrapper for calling function using next() in express.js style",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
-  "dependencies" : {
+  "dependencies": {
     "async": "^0.9.0",
     "boom": "^2.7.0"
   },
@@ -14,12 +14,16 @@
     "next",
     "hapijs"
   ],
-  "engines" : {
-    "node" : "*"
+  "engines": {
+    "node": "*"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/Pranay92/hapi-next.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pranay92/hapi-next.git"
+  },
+  "devDependencies": {
+    "mocha": "latest",
+    "should": "^7.0.1"
   },
   "author": "Pranay Dubey <pranaydubey3009@gmail.com> (https://github.com/Pranay92)",
   "license": "MIT"
