@@ -59,5 +59,19 @@ describe('Series Test Suite', function() {
 
 		});
 
+		it('should throw error', function(done) {
+
+			var funcArray = [
+				mockFunc.testSuiteOne.one,
+				mockFunc.nonExistentFunc
+			];
+
+			(function(){
+				new Series(funcArray)
+			}).should.throw();
+			
+			done();
+		});
+
 	});
 });
