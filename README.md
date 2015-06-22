@@ -11,7 +11,7 @@ Module that allows to inject next() in your route handler
 Consider the following route handler in hapi:
 
 ```
-handle : function(request, reply) {
+handler : function(request, reply) {
     controller.someFunc();
 }
 ```
