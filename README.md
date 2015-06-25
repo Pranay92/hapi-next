@@ -5,6 +5,9 @@ Install via **npm**
 `npm install hapi-next`
 
 
+**Important**
+
+**Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes:
 
 Module that allows to inject next() in your route handler
 
@@ -63,12 +66,7 @@ We have the following problem in the above:
 Frameworks like *Express.JS* have a beautiful feature called **next()** that allows user to invoke functions in any order and completely independent of each other. While this feature is a part of ExpressJS, this can also be implemented as a separate npm module using **hapi-next**
 
 
-**hapi-next** can be used in two ways
-
-1. As a series of independent functions using **callbacks**
-2. As a series of independent functions using **promises**
-
-# hapi-next using callbacks:
+**hapi-next** can be used in the following way
 
 Require `hapi-next`
 ```
@@ -95,71 +93,21 @@ handler : function(request,reply) {
 your functions:
 
 ```
-function validate(request,reply,next) {
+function validate(request,reply,data) {
   // do some validtion here
-  next(); // calling next passes control to the next function in the series
+  reply.continue(); // calling continue passes control to the next function in the series
 }
 
 function someFuncToGetData(request,reply,next) {
   db.queryAsync(request.query,function(err,data) {
     
     if(err) {
-      return next(err); // hapi-next handles error by default, this will break the execution chain and send error response 
+      return reply.continue(err); // hapi-next handles error by default, this will break the execution chain and send error response 
     }
     
     reply.data = data; // hapi-next will look for 'data' in the reply object and send it once all the functions are executed
-    next();
+    reply.continue();
   });
-}
-```
-
-# hapi-next using promises
-
-your handler:
-
-```
-handler : function(request,reply) {
-    
-    var funcArray = [
-      validator.validate,
-      controller.someFuncToGetData,
-      controller.processSomeData
-    ];
-    
-    var series = new Series(funcArray);
-    series.promise(request,reply);
-}
-
-```
-your functions:
-
-```
-function validate(request,reply) {
-
-  // do some validtion here
-  var defer = Promise.defer(); // use any promise library like blue-bird
-  
-  //do some validation here 
-  // do defer.resolve(data) inside any async operation
-  
-  return defer.promise;
-}
-
-function someFuncToGetData(request,reply) {
-
-  var defer = Promise.defer();
-
-  db.queryAsync(request.query,function(err,data) {
-    
-    if(err) {
-      return defer.reject(err); 
-    }
-    
-    defer.resolve(data);
-
-  });
-  
-  return defer.promise;
 }
 ```
 

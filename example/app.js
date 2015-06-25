@@ -12,29 +12,13 @@ server.connection({'port' : 3000});
 
 
 server.route({
-	path : '/promise/users',
+	path : '/users',
 	method : 'GET',
 	handler : function(request,reply){
 		
 		var funcArray = [
-			validator.promiseValidate,
-			controller.promiseGet
-		];
-
-		var series = new Series(funcArray);
-		series.promise(request,reply);
-
-	}
-});
-
-server.route({
-	path : '/callback/users',
-	method : 'GET',
-	handler : function(request,reply){
-		
-		var funcArray = [
-			validator.callbackValidate,
-			controller.callbackGet
+			validator.validate,
+			controller.get
 		];
 
 		var series = new Series(funcArray);
@@ -43,8 +27,9 @@ server.route({
 	}
 });
 
+
 server.route({
-	path : '/promise/users',
+	path : '/users',
 	method : 'POST',
 	config : {
 		validate : {
@@ -55,32 +40,8 @@ server.route({
 		handler : function(request,reply){
 			
 			var funcArray = [
-				validator.promiseValidate,
-				controller.promiseAdd
-			];
-
-			var series = new Series(funcArray);
-			series.promise(request,reply);
-
-		}
-	}
-
-});
-
-server.route({
-	path : '/callback/users',
-	method : 'POST',
-	config : {
-		validate : {
-			payload : {
-				name : joi.string().required()
-			}
-		},
-		handler : function(request,reply){
-			
-			var funcArray = [
-				validator.callbackValidate,
-				controller.callbackAdd
+				validator.validate,
+				controller.add
 			];
 
 			var series = new Series(funcArray);

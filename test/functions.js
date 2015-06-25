@@ -13,20 +13,20 @@ module.exports = {
 };
 
 
-function SuiteOneFuncOne(request,reply,next) {
-	next();
+function SuiteOneFuncOne(request,reply) {
+	reply.continue();
 }
 
 
-function SuiteOneFuncTwo(request,reply,next) {
+function SuiteOneFuncTwo(request,reply) {
 	reply.data = 'Sent from test function';
-	next();
+	reply.continue();
 }
 
-function SuiteTwoFuncOne(request,reply,next) {
-	next();
+function SuiteTwoFuncOne(request,reply) {
+	reply.continue();
 };
 
-function SuiteTwoFuncTwo(request,reply,next) {
-	next('Thrown from the server!');
+function SuiteTwoFuncTwo(request,reply) {
+	reply.continue('Thrown from the server!');
 };

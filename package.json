@@ -1,6 +1,6 @@
 {
   "name": "hapi-next",
-  "version": "0.1.4",
+  "version": "0.2.1",
   "description": "Hapi js wrapper for calling function using next() in express.js style",
   "main": "index.js",
   "scripts": {

@@ -2,49 +2,24 @@ var users = require('./user-dump'),
 	Promise = require('bluebird')
 
 module.exports = {
-	promiseGet  : PromiseGet,
-	promiseAdd : PromiseAdd,
-	callbackGet : CallbackGet,
-	callbackAdd : CallbackAdd
+	get : Get,
+	add : Add
 };
 
 
-function PromiseGet(request,reply) {
-	var defer = Promise.defer();
-
-	setTimeout(function() {
-		defer.resolve(users);
-	},500);
-
-	return defer.promise;
-}
-
-function PromiseAdd(request,reply) {
-
-	var defer = Promise.defer();
-
-	setTimeout(function() {
-		users.push({name : request.payload.name,id : (users.length + 1)});
-		defer.resolve();
-	},500);
-
-	return defer.promise;
-}
-
-
-function CallbackGet(request,reply,next) {
+function Get(request,reply,data) {
 	
 	setTimeout(function() {
 		reply.data = users;
-		next();
+		reply.continue();
 	},500);
 }
 
-function CallbackAdd(request,reply,next) {
+function Add(request,reply,data) {
 	
 	setTimeout(function() {
 		users.push({name : request.payload.name,id : (users.length + 1)});
-		next();
+		reply.continue();
 	},500);
 }
 

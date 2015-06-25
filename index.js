@@ -32,15 +32,18 @@ Series.prototype.execute = function(request,reply) {
 
 	async.series(arr.map(function(func) {
 		return function(cb) {
-
-			func.call({},request,reply,function(err) {
+			
+			reply.continue = function(err) {
 				
 				if(err) {
 					return cb(err);
 				}
 
 				cb();
-			});
+			};
+
+			func.call({},request,reply,reply.data);
+			reply.data = {};
 
 		}
 	}),function(err,results) {
@@ -53,56 +56,6 @@ Series.prototype.execute = function(request,reply) {
 		reply.data = reply.data || defaultData;
 		reply(reply.data);
 	});
-};
-
-Series.prototype.promise = function(request,reply) {
-
-	if(!request) {
-		throw new Error('Request can\'t be empty.');
-		return;
-	}
-
-	if(!reply) {
-		throw new Error('Reply can\'t be empty.');
-		return;
-	}
-
-	var arr = this.arr,
-			currCall;
-
-	async.series(arr.map(function(func) {
-
-		return function(cb) {
-
-			currCall = func.call({},request,reply);
-
-			if(!currCall || !currCall.then || (typeof currCall.then !== 'function') ) {
-				return cb();
-			}
-
-			currCall.then(function(data) {
-				if(data) {
-					reply.data = data;	
-				}
-				cb();
-			})
-			.catch(function(e) {
-				cb(e);
-			});
-
-		}
-	}),function(err,results) {
-		
-		if(err) {
-			reply(boom.badData(err));
-			return;
-		}
-
-		reply.data = reply.data || defaultData;
-		reply(reply.data);
-		
-	});
-
 };
 
 module.exports = Series;

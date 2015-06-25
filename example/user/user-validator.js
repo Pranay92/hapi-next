@@ -2,25 +2,13 @@ var Promise = require('bluebird');
 
 module.exports = {
   promiseValidate  : PromiseValidate,
-  callbackValidate : CallbackValidate
+  validate : Validate
 };
 
 
-function PromiseValidate(request,reply) {
-  var defer = Promise.defer();
-
+function CallbackValidate(request,reply) {
   setTimeout(function() {
-    // add some validation logic here
-    defer.resolve();
-  },500);
-
-  return defer.promise;
-}
-
-function CallbackValidate(request,reply,next) {
-  setTimeout(function() {
-    // add some valiation logic here
-    next();
+    reply.continue();
   },500);
 }
 
