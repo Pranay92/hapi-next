@@ -93,12 +93,13 @@ handler : function(request,reply) {
 your functions:
 
 ```
+// pass any value to reply.data in a function and it is passed as data argument in the next function in the chain
 function validate(request,reply,data) {
   // do some validtion here
   reply.continue(); // calling continue passes control to the next function in the series
 }
 
-function someFuncToGetData(request,reply,next) {
+function someFuncToGetData(request,reply,data) {
   db.queryAsync(request.query,function(err,data) {
     
     if(err) {
