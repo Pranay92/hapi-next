@@ -5,9 +5,9 @@ Install via **npm**
 `npm install hapi-next`
 
 
-**Important**
+## Important !!
 
-**Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes:
+> **Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes:
 
 Module that allows to inject next() in your route handler
 
