@@ -73,5 +73,18 @@ describe('Series Test Suite', function() {
 			done();
 		});
 
+		it('should pass data in between functions', function(done) {
+
+			var funcArray = [
+				mockFunc.testSuiteThree.one,
+				mockFunc.testSuiteThree.two
+			];
+
+			var series = new Series(funcArray);
+			series.execute(request,reply);
+			response.should.equal('1122');
+			done();
+		});
+
 	});
 });
