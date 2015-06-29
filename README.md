@@ -1,4 +1,7 @@
-# hapi-next             
+## hapi-next             
+
+Add modularity to your route handlers.
+
 [![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next)
 
 Install via **npm**
@@ -94,24 +97,39 @@ handler : function(request,reply) {
 your functions:
 
 ```
-// pass any value to reply.data in a function and it is passed as data argument in the next function in the chain
 function validate(request,reply,data) {
-  // do some validtion here
-  reply.continue(); // calling continue passes control to the next function in the series
+  reply.continue();
 }
 
 function someFuncToGetData(request,reply,data) {
-  db.queryAsync(request.query,function(err,data) {
-    
+  db.persons.queryAsync(request.query,function(err,persons) {
     if(err) {
-      return reply.continue(err); // hapi-next handles error by default, this will break the execution chain and send error response 
+      return reply.continue(err);
     }
-    
-    reply.data = data; // hapi-next will look for 'data' in the reply object and send it once all the functions are executed
+    reply.data = persons;
     reply.continue();
   });
 }
+
+function processSomeData(request,reply,data) {
+  var processed = [];
+  data.forEach(function(dataObj) {
+    processed.push(dataObj.name);
+  });
+  reply.data = processed;
+  reply.continue();
+}
 ```
+
+###Methods
+
+**reply.continue(err)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client
+
+**reply.data** Object used to pass data between function as a third argument **data** for the next function in the chain. (see function signature in the above example). This defaults to an empty object({}). 
+
+#### What about reply() ?
+
+You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next DOES NOT overrides the reply() method. 
 
 
 
