@@ -121,7 +121,7 @@ function processSomeData(request,reply,data) {
 }
 ```
 
-###Methods
+### Methods
 
 **reply.continue(err)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client
 
