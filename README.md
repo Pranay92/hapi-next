@@ -11,7 +11,9 @@ Install via **npm**
 
 ## Important !!
 
-> **Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes:
+> **Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes.
+
+> **data** as a third argument has been removed since version **0.3.0**. Install version **0.2.6** and below if you still want to use it.
 
 Module that allows to inject next() in your route handler
 
@@ -97,11 +99,11 @@ handler : function(request,reply) {
 your functions:
 
 ```
-function validate(request,reply,data) {
+function validate(request,reply) {
   reply.continue();
 }
 
-function someFuncToGetData(request,reply,data) {
+function someFuncToGetData(request,reply) {
   db.persons.queryAsync(request.query,function(err,persons) {
     if(err) {
       return reply.continue(err);
@@ -111,9 +113,9 @@ function someFuncToGetData(request,reply,data) {
   });
 }
 
-function processSomeData(request,reply,data) {
+function processSomeData(request,reply) {
   var processed = [];
-  data.forEach(function(dataObj) {
+  reply.data.forEach(function(dataObj) {
     processed.push(dataObj.name);
   });
   reply.data = processed;
@@ -121,15 +123,22 @@ function processSomeData(request,reply,data) {
 }
 ```
 
-###Methods
+### Methods
 
 **reply.continue(err)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client
 
-**reply.data** Object used to pass data between function as a third argument **data** for the next function in the chain. (see function signature in the above example). This defaults to an empty object({}). 
+**reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to an object({'success' : true}). 
 
 #### What about reply() ?
 
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next DOES NOT overrides the reply() method. 
+
+### Change log
+
+**0.3.0** Removed **data** as a third argument from the functions. Use **reply.data** instead for passing data between functions.
+
+**0.2.1** Removed **Series.promise** and its related componenets
+
 
 
 

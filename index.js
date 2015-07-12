@@ -40,7 +40,6 @@ Series.prototype.execute = function(request,reply) {
 				}
 
 				cb();
-				reply.data = {};
 			};
 
 			func.call({},request,reply,reply.data);
@@ -55,6 +54,7 @@ Series.prototype.execute = function(request,reply) {
 
 		reply.data = reply.data || defaultData;
 		reply(reply.data);
+		reply.data = {};
 	});
 };
 

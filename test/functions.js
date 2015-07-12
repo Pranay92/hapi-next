@@ -18,31 +18,30 @@ module.exports = {
 };
 
 
-function SuiteOneFuncOne(request,reply,data) {
+function SuiteOneFuncOne(request,reply) {
 	reply.continue();
 }
 
 
-function SuiteOneFuncTwo(request,reply,data) {
+function SuiteOneFuncTwo(request,reply) {
 	reply.data = 'Sent from test function';
 	reply.continue();
 }
 
-function SuiteTwoFuncOne(request,reply,data) {
+function SuiteTwoFuncOne(request,reply) {
 	reply.continue();
 };
 
-function SuiteTwoFuncTwo(request,reply,data) {
+function SuiteTwoFuncTwo(request,reply) {
 	reply.continue('Thrown from the server!');
 };
 
-function SuiteThreeFuncOne(request,reply,data) {
+function SuiteThreeFuncOne(request,reply) {
 	reply.data = '11';
 	reply.continue();
 };
 
-function SuiteThreeFuncTwo(request,reply,data) {
-	data += '22';
-	reply.data = data;
+function SuiteThreeFuncTwo(request,reply) {
+	reply.data += '22';
 	reply.continue();
 };

@@ -7,7 +7,7 @@
   "dependencies": {
     "bluebird": "^2.9.30",
     "hapi": "^8.6.1",
-    "hapi-next": "^0.2.1",
+    "hapi-next": "^0.3.0",
     "joi": "^6.4.3"
   },
   "keywords": [

@@ -7,7 +7,7 @@ module.exports = {
 };
 
 
-function Get(request,reply,data) {
+function Get(request,reply) {
 	
 	setTimeout(function() {
 		reply.data = users;
@@ -15,7 +15,7 @@ function Get(request,reply,data) {
 	},500);
 }
 
-function Add(request,reply,data) {
+function Add(request,reply) {
 	
 	setTimeout(function() {
 		users.push({name : request.payload.name,id : (users.length + 1)});
