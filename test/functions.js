@@ -19,29 +19,29 @@ module.exports = {
 
 
 function SuiteOneFuncOne(request,reply) {
-	reply.continue();
+	reply.next();
 }
 
 
 function SuiteOneFuncTwo(request,reply) {
 	reply.data = 'Sent from test function';
-	reply.continue();
+	reply.next();
 }
 
 function SuiteTwoFuncOne(request,reply) {
-	reply.continue();
+	reply.next();
 };
 
 function SuiteTwoFuncTwo(request,reply) {
-	reply.continue('Thrown from the server!');
+	reply.next('Thrown from the server!');
 };
 
 function SuiteThreeFuncOne(request,reply) {
 	reply.data = '11';
-	reply.continue();
+	reply.next();
 };
 
 function SuiteThreeFuncTwo(request,reply) {
 	reply.data += '22';
-	reply.continue();
+	reply.next();
 };

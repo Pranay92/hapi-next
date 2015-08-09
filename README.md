@@ -15,6 +15,8 @@ Install via **npm**
 
 > **data** as a third argument has been removed since version **0.3.0**. Install version **0.2.6** and below if you still want to use it.
 
+> **.continue** has been removed for version 0.2.7 and 0.3.1 onwards. This is because of conflict with hapi's inbuild reply.continue() 
+
 Module that allows to inject next() in your route handler
 
 Consider the following route handler in hapi:
@@ -100,16 +102,16 @@ your functions:
 
 ```
 function validate(request,reply) {
-  reply.continue();
+  reply.next();
 }
 
 function someFuncToGetData(request,reply) {
   db.persons.queryAsync(request.query,function(err,persons) {
     if(err) {
-      return reply.continue(err);
+      return reply.next(err);
     }
     reply.data = persons;
-    reply.continue();
+    reply.next();
   });
 }
 
@@ -119,13 +121,13 @@ function processSomeData(request,reply) {
     processed.push(dataObj.name);
   });
   reply.data = processed;
-  reply.continue();
+  reply.next();
 }
 ```
 
 ### Methods
 
-**reply.continue(err)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client
+**reply.next(err)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client
 
 **reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to an object({'success' : true}). 
 

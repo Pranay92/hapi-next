@@ -33,7 +33,7 @@ Series.prototype.execute = function(request,reply) {
 	async.series(arr.map(function(func) {
 		return function(cb) {
 			
-			reply.continue = function(err) {
+			reply.next = function(err) {
 				
 				if(err) {
 					return cb(err);
