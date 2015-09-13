@@ -133,7 +133,7 @@ function processSomeData(request,reply) {
 
 #### What about reply() ?
 
-You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the reply() method. 
+You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 
 
 ### Change log
 
