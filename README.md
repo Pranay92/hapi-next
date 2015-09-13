@@ -2,7 +2,7 @@
 
 Add modularity to your route handlers.
 
-[![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next)
+[![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next) [![npm](https://img.shields.io/npm/dt/hapi-next.svg)](https://www.npmjs.com/package/hapi-next)
 
 Install via **npm**
 
