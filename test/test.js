@@ -86,5 +86,21 @@ describe('Series Test Suite', function() {
 			done();
 		});
 
+		it('should throw unauthorized status code', function(done) {
+
+			var funcArray = [
+				mockFunc.testSuiteFour.one,
+				mockFunc.testSuiteFour.two
+			];
+
+			var series = new Series(funcArray);
+			series.execute(request,reply);
+			response.should.not.equal(undefined);
+			response.isBoom.should.equal(true);
+			response.output.statusCode.should.equal(401);
+			response.output.payload.message.should.equal('Unauthorized')
+			done();
+		});
+
 	});
 });

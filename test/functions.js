@@ -13,6 +13,11 @@ module.exports = {
 	testSuiteThree : {
 		one : SuiteThreeFuncOne,
 		two : SuiteThreeFuncTwo
+	},
+
+	testSuiteFour : {
+		one : SuiteFourFuncOne,
+		two : SuiteFourFuncTwo,
 	}
 
 };
@@ -33,7 +38,7 @@ function SuiteTwoFuncOne(request,reply) {
 };
 
 function SuiteTwoFuncTwo(request,reply) {
-	reply.next('Thrown from the server!');
+	reply.next('Thrown from the server!',{ status : 422});
 };
 
 function SuiteThreeFuncOne(request,reply) {
@@ -44,4 +49,13 @@ function SuiteThreeFuncOne(request,reply) {
 function SuiteThreeFuncTwo(request,reply) {
 	reply.data += '22';
 	reply.next();
+};
+
+function SuiteFourFuncOne(request,reply) {
+	reply.data = 'something';
+	reply.next();
+};
+
+function SuiteFourFuncTwo(request,reply) {
+	reply.next('Unauthorized',{status : 401});
 };
