@@ -15,7 +15,7 @@ npm install hapi-next
 
 > **data** as a third argument has been removed since version **0.3.0**. Install version **0.2.6** and below if you still want to use it.
 
-> **.continue** has been removed for version **0.2.7** and **0.3.1** onwards. This is because of conflict with hapi's inbuild **reply.continue()** 
+> **.continue** has been removed for version **0.2.7** and **0.3.1** onwards. This is because of conflict with hapi's inbuild **reply.continue()**. Use **reply.next()** for version **0.2.7** and **0.3.1** onwards.
 
 Module that allows to inject next() in your route handler
 
