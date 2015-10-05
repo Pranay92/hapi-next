@@ -18,6 +18,11 @@ module.exports = {
 	testSuiteFour : {
 		one : SuiteFourFuncOne,
 		two : SuiteFourFuncTwo,
+	},
+
+	testSuiteFive : {
+		one : SuiteFiveFuncOne,
+		two : SuiteFiveFuncTwo
 	}
 
 };
@@ -59,3 +64,17 @@ function SuiteFourFuncOne(request,reply) {
 function SuiteFourFuncTwo(request,reply) {
 	reply.next('Unauthorized',{status : 401});
 };
+
+function SuiteFiveFuncOne(request,reply) {
+	reply.next();
+};
+
+function SuiteFiveFuncTwo(request,reply) {
+	reply.next('Internal Server Error',{status : 500});
+};
+
+
+
+
+
+

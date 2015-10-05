@@ -102,5 +102,21 @@ describe('Series Test Suite', function() {
 			done();
 		});
 
+		it('should throw internal server error', function(done) {
+
+			var funcArray = [
+				mockFunc.testSuiteFive.one,
+				mockFunc.testSuiteFive.two
+			];
+
+			var series = new Series(funcArray);
+			series.execute(request,reply);
+			response.should.not.equal(undefined);
+			response.isBoom.should.equal(true);
+			response.output.statusCode.should.equal(500);
+			response.output.payload.message.should.equal('An internal server error occurred')
+			done();
+		});
+
 	});
 });
