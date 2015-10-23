@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "mocha": "latest",
-    "should": "^7.0.1"
+    "should": "^7.0.1",
+    "bluebird" : "*"
   },
   "author": "Pranay Dubey <pranaydubey3009@gmail.com> (https://github.com/Pranay92)",
   "license": "MIT"

@@ -1,5 +1,10 @@
+var Promise = require('bluebird');
+
 module.exports = {
 	
+	/*
+		Test suites for Execute chain
+	*/
 	testSuiteOne : {
 		one : SuiteOneFuncOne,
 		two : SuiteOneFuncTwo
@@ -23,7 +28,17 @@ module.exports = {
 	testSuiteFive : {
 		one : SuiteFiveFuncOne,
 		two : SuiteFiveFuncTwo
+	},
+
+	/*
+		Test suites for Promise chain
+	*/
+
+	testSuiteSix : {
+		one : SuiteSixFuncOne,
+		two : SuiteSixFuncTwo
 	}
+
 
 };
 
@@ -72,6 +87,25 @@ function SuiteFiveFuncOne(request,reply) {
 function SuiteFiveFuncTwo(request,reply) {
 	reply.next('Internal Server Error',{status : 500});
 };
+
+function SuiteSixFuncOne(request,reply,data) {
+	return new Promise(function(resolve,reject) {
+		var data = 'Passed from function one';
+		resolve(data);
+	});
+};
+
+function SuiteSixFuncTwo(request,reply,data) {
+	data += ' and merged with function two';
+	return new Promise(function(resolve,reject) {
+		resolve(data);
+	});
+};
+
+
+
+
+
 
 
 

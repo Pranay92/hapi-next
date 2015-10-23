@@ -5,7 +5,7 @@ var Series = require('../index'),
 	reply,
 	response;
 
-describe('Series Test Suite', function() {
+describe('Series Test Suite for Execute', function() {
 	
 	beforeEach(function(done) {
 		
@@ -120,3 +120,49 @@ describe('Series Test Suite', function() {
 
 	});
 });
+
+
+describe('Series Test Suite for Promise', function() {
+
+	beforeEach(function(done) {
+		
+		response = null;
+
+		request = function() {
+
+		};
+
+		reply = function(data) {
+			response = data;
+		};
+
+		done();
+
+	});
+
+	it('should return data passed as third argument', function(done) {
+		
+		this.timeout(2000);
+
+		var funcArray = [
+			mockFunc.testSuiteSix.one,
+			mockFunc.testSuiteSix.two
+		];
+
+		var series = new Series(funcArray);
+		series.promise(request,reply);
+
+		setTimeout(function() {
+			response.should.equal('Passed from function one and merged with function two');
+			done();
+		},1000)
+	});
+
+});
+
+
+
+
+
+
+

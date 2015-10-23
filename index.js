@@ -42,13 +42,13 @@ Series.prototype.promise = function(request,reply) {
 			currInvocation = func.call({},request,reply,previousData);
 
 			if(!currInvocation.then || !currInvocation.catch) {
-				reply.data = currInvocation;
+				previousData = currInvocation;
 				cb();
 				return;
 			}
 
 			currInvocation.then(function(data) {
-				
+
 				if(data) {
 					previousData = data;
 					cb();
@@ -71,10 +71,11 @@ Series.prototype.promise = function(request,reply) {
 			reply(self.error(err));
 			return;
 		}
-
-		reply.data = reply.data || defaultData;
+		console.log(previousData)
+		reply.data = previousData || reply.data || defaultData;
 		reply(reply.data);
 		reply.data = {};
+		previousData = null;
 
 	});
 
