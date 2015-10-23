@@ -17,6 +17,69 @@ function Validate(arr) {
 	}
 }
 
+Series.prototype.promise = function(request,reply) {
+
+	if(!request) {
+		throw new Error('Request can\'t be empty.');
+		return;
+	}
+
+	if(!reply) {
+		throw new Error('Reply can\'t be empty.');
+		return;
+	}
+
+	var arr = this.arr,
+			self = this,
+			currInvocation,
+			previousData,
+			reqErrObj;
+
+	async.series(arr.map(function(func) {
+
+		return function(cb) {
+			
+			currInvocation = func.call({},request,reply,previousData);
+
+			if(!currInvocation.then || !currInvocation.catch) {
+				reply.data = currInvocation;
+				cb();
+				return;
+			}
+
+			currInvocation.then(function(data) {
+				
+				if(data) {
+					previousData = data;
+					cb();
+					return;
+				};
+
+				previousData = null;
+				cb();
+
+			});
+
+			currInvocation.catch(function(e) {
+				cb(e);
+			});
+
+		}
+	}),function(err,results) {
+
+		if(err) {
+			reply(self.error(err));
+			return;
+		}
+
+		reply.data = reply.data || defaultData;
+		reply(reply.data);
+		reply.data = {};
+
+	});
+
+};
+
 Series.prototype.execute = function(request,reply) {
 	
 	if(!request) {
