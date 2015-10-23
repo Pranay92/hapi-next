@@ -110,7 +110,7 @@ Series.prototype.execute = function(request,reply) {
 				cb();
 			};
 
-			func.call({},request,reply,reply.data);
+			func.call({},request,reply);
 
 		}
 	}),function(err,results) {
