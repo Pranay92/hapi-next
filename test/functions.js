@@ -37,6 +37,11 @@ module.exports = {
 	testSuiteSix : {
 		one : SuiteSixFuncOne,
 		two : SuiteSixFuncTwo
+	},
+
+	testSuiteSeven : {
+		one : SuiteSevenFuncOne,
+		two : SuiteSevenFuncTwo
 	}
 
 
@@ -58,7 +63,7 @@ function SuiteTwoFuncOne(request,reply) {
 };
 
 function SuiteTwoFuncTwo(request,reply) {
-	reply.next('Thrown from the server!',{ status : 422});
+	reply.next({message : 'Thrown from the server!', status : 422});
 };
 
 function SuiteThreeFuncOne(request,reply) {
@@ -77,7 +82,7 @@ function SuiteFourFuncOne(request,reply) {
 };
 
 function SuiteFourFuncTwo(request,reply) {
-	reply.next('Unauthorized',{status : 401});
+	reply.next({message : 'Unauthorized',status : 401});
 };
 
 function SuiteFiveFuncOne(request,reply) {
@@ -85,20 +90,32 @@ function SuiteFiveFuncOne(request,reply) {
 };
 
 function SuiteFiveFuncTwo(request,reply) {
-	reply.next('Internal Server Error',{status : 500});
+	reply.next({message : 'Internal Server Error',status : 500});
 };
 
-function SuiteSixFuncOne(request,reply,data) {
+function SuiteSixFuncOne(request,reply) {
 	return new Promise(function(resolve,reject) {
 		var data = 'Passed from function one';
 		resolve(data);
 	});
 };
 
-function SuiteSixFuncTwo(request,reply,data) {
-	data += ' and merged with function two';
+function SuiteSixFuncTwo(request,reply) {
+	reply.data += ' and merged with function two';
 	return new Promise(function(resolve,reject) {
-		resolve(data);
+		resolve(reply.data);
+	});
+};
+
+function SuiteSevenFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		reject({message : 'Error from function one',status : 422});
+	});
+};
+
+function SuiteSevenFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		resolve();
 	});
 };
 

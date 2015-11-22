@@ -47,10 +47,11 @@ Series.prototype.promise = function(request,reply) {
 				return;
 			}
 
-			currInvocation.then(function(data) {
+			currInvocation
+			.then(function(data) {
 
 				if(data) {
-					previousData = data;
+					reply.data = data;
 					cb();
 					return;
 				};
@@ -58,9 +59,8 @@ Series.prototype.promise = function(request,reply) {
 				previousData = null;
 				cb();
 
-			});
-
-			currInvocation.catch(function(e) {
+			})
+			.catch(function(e) {
 				cb(e);
 			});
 
@@ -69,9 +69,9 @@ Series.prototype.promise = function(request,reply) {
 
 		if(err) {
 			reply(self.error(err));
-			return;
+			return;	
 		}
-		console.log(previousData)
+
 		reply.data = previousData || reply.data || defaultData;
 		reply(reply.data);
 		reply.data = {};
@@ -100,12 +100,10 @@ Series.prototype.execute = function(request,reply) {
 	async.series(arr.map(function(func) {
 		return function(cb) {
 			
-			reply.next = function(err,obj) {
+			reply.next = function(err) {
 				
 				if(err) {
-					reqErrObj = obj || {};
-					reqErrObj.message = err;
-					return cb(reqErrObj);
+					return cb(err);
 				}
 
 				cb();
@@ -132,6 +130,11 @@ Series.prototype.merge = function(base,derived) {
 	
 	derived = derived || {};
 
+	if(typeof derived === 'string') {
+		base.message = derived;
+		return base;
+	}
+
 	for(var i in base) {
 		if(derived[i]) {
 			base[i] = derived[i];
@@ -153,7 +156,6 @@ Series.prototype.error = function(err) {
 			};
 
 	err = this.merge(defaultErrObj,err);
-	
 	return boom.create(err.status,err.message);
 };
 

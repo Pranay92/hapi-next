@@ -11,11 +11,16 @@ npm install hapi-next
 
 ## Important !!
 
-> **Series.promise** has been removed since version **0.2.1**. Also **Series.execute** function and its function signature has been changed. See below example for changes.
+> **Series.promise** has been added back since version **0.4.0**. Also **Series.execute** function and its function signature has been changed. See below example for changes.
 
 > **data** as a third argument has been removed since version **0.3.0**. Install version **0.2.6** and below if you still want to use it.
 
 > **.continue** has been removed for version **0.2.7** and **0.3.1** onwards. This is because of conflict with hapi's inbuild **reply.continue()**. Use **reply.next()** for version **0.2.7** and **0.3.1** onwards.
+
+## Deprecation Warning !!
+
+> Calling **reply.next(err)** now needs either an object or just an error message(string). See example for details
+
 
 Module that allows to inject next() in your route handler
 
@@ -108,7 +113,7 @@ function validate(request,reply) {
 function someFuncToGetData(request,reply) {
   db.persons.queryAsync(request.query,function(err,persons) {
     if(err) {
-      return reply.next(err, {status : 500});
+      return reply.next({message : err, status : 422});
     }
     reply.data = persons;
     reply.next();
@@ -136,6 +141,8 @@ function processSomeData(request,reply) {
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 
 
 ### Change log
+
+**0.4.0** Added back **series.promise** as a new method of passing values in between. This is useful when we don't necessarily need to use callbacks, instead simply return promise frome each function.
 
 **0.3.0** Removed **data** as a third argument from the functions. Use **reply.data** instead for passing data between functions.
 

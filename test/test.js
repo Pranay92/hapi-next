@@ -21,104 +21,103 @@ describe('Series Test Suite for Execute', function() {
 
 	});
 
-	describe('series',function() {
+	
+	it('should be defined',function(done) {
+		Series.should.not.equal(undefined);
+		done();
+	});
+
+	it('should execute all functions', function(done) {
 		
-		it('should be defined',function(done) {
-			Series.should.not.equal(undefined);
-			done();
-		});
+		var funcArray = [
+			mockFunc.testSuiteOne.one,
+			mockFunc.testSuiteOne.two
+		];
 
-		it('should execute all functions', function(done) {
-			
-			var funcArray = [
-				mockFunc.testSuiteOne.one,
-				mockFunc.testSuiteOne.two
-			];
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.should.equal('Sent from test function');
+		done();
+	});
 
-			var series = new Series(funcArray);
-			series.execute(request,reply);
-			response.should.not.equal(undefined);
-			response.should.equal('Sent from test function');
-			done();
-		});
+	it('should return error as a reply', function(done) {
 
-		it('should return error as a reply', function(done) {
+		var funcArray = [
+			mockFunc.testSuiteTwo.one,
+			mockFunc.testSuiteTwo.two
+		];
 
-			var funcArray = [
-				mockFunc.testSuiteTwo.one,
-				mockFunc.testSuiteTwo.two
-			];
-
-			var series = new Series(funcArray);
-			series.execute(request,reply);
-			response.should.not.equal(undefined);
-			response.isBoom.should.equal(true);
-			response.output.statusCode.should.equal(422);
-			response.output.payload.message.should.equal('Thrown from the server!')
-			done();
-
-		});
-
-		it('should throw error', function(done) {
-
-			var funcArray = [
-				mockFunc.testSuiteOne.one,
-				mockFunc.nonExistentFunc
-			];
-
-			(function(){
-				new Series(funcArray)
-			}).should.throw();
-			
-			done();
-		});
-
-		it('should pass data in between functions', function(done) {
-
-			var funcArray = [
-				mockFunc.testSuiteThree.one,
-				mockFunc.testSuiteThree.two
-			];
-
-			var series = new Series(funcArray);
-			series.execute(request,reply);
-			response.should.equal('1122');
-			done();
-		});
-
-		it('should throw unauthorized status code', function(done) {
-
-			var funcArray = [
-				mockFunc.testSuiteFour.one,
-				mockFunc.testSuiteFour.two
-			];
-
-			var series = new Series(funcArray);
-			series.execute(request,reply);
-			response.should.not.equal(undefined);
-			response.isBoom.should.equal(true);
-			response.output.statusCode.should.equal(401);
-			response.output.payload.message.should.equal('Unauthorized')
-			done();
-		});
-
-		it('should throw internal server error', function(done) {
-
-			var funcArray = [
-				mockFunc.testSuiteFive.one,
-				mockFunc.testSuiteFive.two
-			];
-
-			var series = new Series(funcArray);
-			series.execute(request,reply);
-			response.should.not.equal(undefined);
-			response.isBoom.should.equal(true);
-			response.output.statusCode.should.equal(500);
-			response.output.payload.message.should.equal('An internal server error occurred')
-			done();
-		});
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.isBoom.should.equal(true);
+		response.output.statusCode.should.equal(422);
+		response.output.payload.message.should.equal('Thrown from the server!');
+		done();
 
 	});
+
+	it('should throw error', function(done) {
+
+		var funcArray = [
+			mockFunc.testSuiteOne.one,
+			mockFunc.nonExistentFunc
+		];
+
+		(function(){
+			new Series(funcArray)
+		}).should.throw();
+		
+		done();
+	});
+
+	it('should pass data in between functions', function(done) {
+
+		var funcArray = [
+			mockFunc.testSuiteThree.one,
+			mockFunc.testSuiteThree.two
+		];
+
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.equal('1122');
+		done();
+	});
+
+	it('should throw unauthorized status code', function(done) {
+
+		var funcArray = [
+			mockFunc.testSuiteFour.one,
+			mockFunc.testSuiteFour.two
+		];
+
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.isBoom.should.equal(true);
+		response.output.statusCode.should.equal(401);
+		response.output.payload.message.should.equal('Unauthorized');
+		done();
+	});
+
+	it('should throw internal server error', function(done) {
+
+		var funcArray = [
+			mockFunc.testSuiteFive.one,
+			mockFunc.testSuiteFive.two
+		];
+
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.isBoom.should.equal(true);
+		response.output.statusCode.should.equal(500);
+		response.output.payload.message.should.equal('An internal server error occurred');
+		done();
+	});
+
+
 });
 
 
@@ -155,7 +154,28 @@ describe('Series Test Suite for Promise', function() {
 		setTimeout(function() {
 			response.should.equal('Passed from function one and merged with function two');
 			done();
-		},1000)
+		},50)
+	});
+
+	it('should return error', function(done) {
+		
+		this.timeout(2000);
+
+		var funcArray = [
+			mockFunc.testSuiteSeven.one,
+			mockFunc.testSuiteSeven.two
+		];
+
+		var series = new Series(funcArray);
+		series.promise(request,reply);
+
+		setTimeout(function() {
+			response.should.not.equal(undefined);
+			response.isBoom.should.equal(true);
+			response.output.statusCode.should.equal(422);
+			response.output.payload.message.should.equal('Error from function one');
+			done();
+		},50)
 	});
 
 });
