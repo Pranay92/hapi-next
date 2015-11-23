@@ -19,7 +19,7 @@ npm install hapi-next
 
 ## Deprecation Warning !!
 
-> Calling **reply.next(err)** now needs either an object or just an error message(string). See example for details
+> Calling **reply.next(err)** since **0.4.0** needs either an object or just an error message(string). See example for details
 
 
 Module that allows to inject next() in your route handler
