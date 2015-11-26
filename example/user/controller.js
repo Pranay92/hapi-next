@@ -1,4 +1,4 @@
-var users = require('./user-dump'),
+var users = require('./stub'),
 	Promise = require('bluebird')
 
 module.exports = {
