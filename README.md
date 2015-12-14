@@ -149,5 +149,7 @@ You're free to call reply() anywhere in the function chain. This will just stop 
 **0.2.1** Removed **Series.promise** and its related componenets
 
 
+### TODO
 
+1. Add `Series.parallel()` to make functions execute in parallel that are independent and can immediately send a response.
 
