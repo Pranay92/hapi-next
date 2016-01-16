@@ -1,4 +1,3 @@
-## hapi-next             
 
 <img src="https://github.com/Pranay92/hapi-next/blob/master/hapi-next.png" />
 
