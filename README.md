@@ -135,7 +135,7 @@ function processSomeData(request,reply) {
 
 **reply.next(err,config)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client. Also the **config** object is optional. As of now, it only supports sending status, but I'm willing to support more configuration in the future. 
 
-**reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to an object({'success' : true}). 
+**reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to object ````{success : true}````. 
 
 #### What about reply() ?
 
