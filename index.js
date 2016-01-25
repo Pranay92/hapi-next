@@ -126,6 +126,40 @@ Series.prototype.execute = function(request,reply) {
 	});
 };
 
+Series.prototype.background = function(request,reply) {
+
+	if(!request) {
+		throw new Error('Request can\'t be empty.');
+		return;
+	}
+
+	if(!reply) {
+		throw new Error('Reply can\'t be empty.');
+		return;
+	}
+
+	var arr = this.arr,
+			self = this,
+			reqErrObj;
+
+	async.parallel(arr.map(function(func) {
+		return function(cb) {
+			
+			reply.next = function(err) {};
+
+			func.call({},request,reply);
+			cb();
+
+		}
+	}),function(err,results) {
+
+		reply.data = reply.data || defaultData;
+		reply(reply.data);
+		reply.data = {};
+
+	});
+};
+
 Series.prototype.merge = function(base,derived) {
 	
 	derived = derived || {};

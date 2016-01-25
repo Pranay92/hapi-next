@@ -180,6 +180,57 @@ describe('Series Test Suite for Promise', function() {
 
 });
 
+describe('Series Test Suite for Background Chain', function() {
+	
+	beforeEach(function(done) {
+		
+		response = null;
+
+		request = function() {
+
+		};
+
+		reply = function(data) {
+			response = data;
+		};
+
+		done();
+
+	});
+
+	it('should not change the reply object',function(done){
+
+		var funcArray = [
+			mockFunc.testSuiteEight.one,
+			mockFunc.testSuiteEight.two
+		];
+
+		var series = new Series(funcArray);
+		series.background(request,reply);
+
+		response.should.not.equal(undefined);
+		response.success.should.equal(true);
+		done();
+
+	});
+
+	it('should change the reply object',function(done){
+
+		var funcArray = [
+			mockFunc.testSuiteNine.one,
+			mockFunc.testSuiteNine.two
+		];
+
+		var series = new Series(funcArray);
+		series.background(request,reply);
+
+		response.should.not.equal(undefined);
+		response.msg.should.equal('something new');
+		done();
+
+	});
+});
+
 
 
 

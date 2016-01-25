@@ -42,8 +42,21 @@ module.exports = {
 	testSuiteSeven : {
 		one : SuiteSevenFuncOne,
 		two : SuiteSevenFuncTwo
-	}
+	},
 
+	/*
+		Test suites for Background chain
+	*/
+
+	testSuiteEight : {
+		one : SuiteEightFuncOne,
+		two : SuiteEightFuncTwo
+	},
+
+	testSuiteNine : {
+		one : SuiteNineFuncOne,
+		two : SuiteNineFuncTwo
+	}
 
 };
 
@@ -120,12 +133,23 @@ function SuiteSevenFuncTwo(request,reply) {
 };
 
 
+function SuiteEightFuncOne(request,reply){
+	reply.next();
+};
 
+function SuiteEightFuncTwo(request,reply){
+	setTimeout(function(){
+		reply.data = {'msg' : 'Changed in the background functions'};
+	},2000)
+};
 
+function SuiteNineFuncOne(request,reply){
+	reply.next();
+};
 
-
-
-
-
+function SuiteNineFuncTwo(request,reply){
+	reply.data = {'msg' : 'something new'};
+	reply.next();
+};
 
 
