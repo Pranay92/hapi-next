@@ -133,7 +133,7 @@ function processSomeData(request,reply) {
 
 ### Methods
 
-**reply.next(err,config)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client. Also the **config** object is optional. As of now, it only supports sending status, but I'm willing to support more configuration in the future. 
+**reply.next(err,config)**  This tells hapi-next to continue executing the next function in the chain. If error is passed as a non-null value, this will break the execution chain and will send the error response back to client. Also the **config** object is optional. Upto version 0.4.0 it only supported sending status, as of **0.5.0** it also supports sending **boom** error object.
 
 **reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to object ````{success : true}````. 
 
@@ -142,6 +142,8 @@ function processSomeData(request,reply) {
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 
 
 ### Change log
+
+**0.5.0** Added support for boom error with PR for issue [#5](https://github.com/Pranay92/hapi-next/commit/7ab8a0aeb6f91cde99544f555cf59aa7b8ad3a99)
 
 **0.4.0** Added back **series.promise** as a new method of passing values in between. This is useful when we don't necessarily need to use callbacks, instead simply return promise frome each function.
 
