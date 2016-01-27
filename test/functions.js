@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var boom = require('boom');
 
 module.exports = {
 	
@@ -56,6 +57,16 @@ module.exports = {
 	testSuiteNine : {
 		one : SuiteNineFuncOne,
 		two : SuiteNineFuncTwo
+	},
+
+	testSuiteTen : {
+		one : SuiteTenFuncOne,
+		two : SuiteTenFuncTwo
+	},
+
+	testSuiteEleven : {
+		one : SuiteElevenFuncOne,
+		two : SuiteElevenFuncTwo
 	}
 
 };
@@ -152,4 +163,23 @@ function SuiteNineFuncTwo(request,reply){
 	reply.next();
 };
 
+function SuiteTenFuncOne(request,reply) {
+	reply.next();
+}
+
+function SuiteTenFuncTwo(request,reply) {
+	reply.next(boom.notFound('Unknown Product'));
+}
+
+function SuiteElevenFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		reject(boom.conflict('Error from function one'));
+	});
+}
+
+function SuiteElevenFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		resolve();
+	});
+}
 

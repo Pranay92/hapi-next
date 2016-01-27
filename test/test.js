@@ -117,6 +117,22 @@ describe('Series Test Suite for Execute', function() {
 		done();
 	});
 
+	it('should throw boom error when passing a boom error', function(done) {
+
+		var funcArray = [
+			mockFunc.testSuiteTen.one,
+			mockFunc.testSuiteTen.two
+		];
+
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.isBoom.should.equal(true);
+		response.output.statusCode.should.equal(404);
+		response.output.payload.message.should.equal('Unknown Product');
+		done();
+	});
+
 
 });
 
@@ -173,6 +189,27 @@ describe('Series Test Suite for Promise', function() {
 			response.should.not.equal(undefined);
 			response.isBoom.should.equal(true);
 			response.output.statusCode.should.equal(422);
+			response.output.payload.message.should.equal('Error from function one');
+			done();
+		},50)
+	});
+
+	it('should return a boom error when passing a boom error', function(done) {
+
+		this.timeout(2000);
+
+		var funcArray = [
+			mockFunc.testSuiteEleven.one,
+			mockFunc.testSuiteEleven.two
+		];
+
+		var series = new Series(funcArray);
+		series.promise(request,reply);
+
+		setTimeout(function() {
+			response.should.not.equal(undefined);
+			response.isBoom.should.equal(true);
+			response.output.statusCode.should.equal(409);
 			response.output.payload.message.should.equal('Error from function one');
 			done();
 		},50)

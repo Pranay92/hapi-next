@@ -184,6 +184,10 @@ Series.prototype.merge = function(base,derived) {
 
 Series.prototype.error = function(err) {
 
+	if (err.isBoom) {
+		return err;
+	}
+
 	var defaultErrObj = {
 				status : 400,
 				message : 'Invalid request'
