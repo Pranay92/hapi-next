@@ -156,3 +156,5 @@ You're free to call reply() anywhere in the function chain. This will just stop 
 
 1. Add `Series.parallel()` to make functions execute in parallel that are independent and can immediately send a response.
 
+2. Add a method to 'get' and 'set' properties of reply.data instead of overriting it on every function invocation.
+
