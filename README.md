@@ -1,13 +1,13 @@
 
 <img src="https://github.com/Pranay92/hapi-next/blob/master/hapi-next.png" />
 
-Add modularity to your hapi route handlers.
-
 [![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next) [![npm](https://img.shields.io/npm/dt/hapi-next.svg)](https://www.npmjs.com/package/hapi-next)
+
+Add modularity to your hapi route handlers.
 
 Install via **npm**
 
-npm install hapi-next
+````npm install hapi-next````
 
 
 ## Important !!
