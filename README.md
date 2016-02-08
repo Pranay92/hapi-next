@@ -10,17 +10,9 @@ Install via **npm**
 ````npm install hapi-next````
 
 
-## Important !!
+## Important! 
 
-> **Series.promise** has been added back since version **0.4.0**. Also **Series.execute** function and its function signature has been changed. See below example for changes.
-
-> **data** as a third argument has been removed since version **0.3.0**. Install version **0.2.6** and below if you still want to use it.
-
-> **.continue** has been removed for version **0.2.7** and **0.3.1** onwards. This is because of conflict with hapi's inbuild **reply.continue()**. Use **reply.next()** for version **0.2.7** and **0.3.1** onwards.
-
-## Deprecation Warning !!
-
-> Calling **reply.next(err)** since **0.4.0** needs either an object or just an error message(string). See example for details
+Please read the [change log](https://github.com/Pranay92/hapi-next/wiki/Change-log) for changes between the version. Using the latest version is recommended always.
 
 
 Module that allows to inject next() in your route handler
@@ -141,20 +133,8 @@ function processSomeData(request,reply) {
 
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 
 
-### Change log
-
-**0.5.0** Added support for boom error with PR for issue [#5](https://github.com/Pranay92/hapi-next/commit/7ab8a0aeb6f91cde99544f555cf59aa7b8ad3a99)
-
-**0.4.0** Added back **series.promise** as a new method of passing values in between. This is useful when we don't necessarily need to use callbacks, instead simply return promise frome each function.
-
-**0.3.0** Removed **data** as a third argument from the functions. Use **reply.data** instead for passing data between functions.
-
-**0.2.1** Removed **Series.promise** and its related componenets
-
-
 ### TODO
 
-1. Add `Series.parallel()` to make functions execute in parallel that are independent and can immediately send a response.
-
+~~1. Add `Series.background()` to make functions execute in parallel that are independent and can immediately send a response.~~    
 2. Add a method to **get** and **set** properties of **reply.data** instead of overwriting it on every function invocation.
 
