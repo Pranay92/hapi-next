@@ -14,6 +14,7 @@ Install via **npm**
 
 Please read the [change log](https://github.com/Pranay92/hapi-next/wiki/Change-log) for changes between the version. Using the latest version is recommended always.
 
+## Description
 
 Module that allows to inject next() in your route handler
 
