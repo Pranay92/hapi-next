@@ -1,5 +1,5 @@
 
-<img src="https://github.com/Pranay92/hapi-next/blob/master/hapi-next.png" />
+<img src="https://raw.githubusercontent.com/Pranay92/hapi-next/master/hapi-next.png" />
 
 [![Build Status](https://travis-ci.org/Pranay92/hapi-next.svg?branch=master)](https://travis-ci.org/Pranay92/hapi-next) [![npm](https://img.shields.io/npm/dt/hapi-next.svg)](https://www.npmjs.com/package/hapi-next)
 
