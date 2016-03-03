@@ -130,6 +130,13 @@ function processSomeData(request,reply) {
 
 **reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to object ````{success : true}````. 
 
+### Series chains
+
+**series.execute(request,reply)**  Executes all the functions in sequence and the response is sent back only once the last function in the series execute OR if any of them fails due to error. Ideal for apis where sequence of the function execution matters.
+
+**series.background(request,reply)** Starts invoking functions and immediately sents back a success response without waiting for any of the function to execute. Ideal for initiating background jobs that do not require monitoring.
+
+
 #### What about reply() ?
 
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 
