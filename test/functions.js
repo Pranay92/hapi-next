@@ -67,6 +67,20 @@ module.exports = {
 	testSuiteEleven : {
 		one : SuiteElevenFuncOne,
 		two : SuiteElevenFuncTwo
+	},
+
+	/*
+		Test suites for parallel chain
+	*/
+
+	testSuiteTwelve : {
+		one : SuiteTwelveFuncOne,
+		two : SuiteTwelveFuncTwo
+	},
+
+	testSuiteThirteen : {
+		one : SuiteThirteenFuncOne,
+		two : SuiteThirteenFuncTwo
 	}
 
 };
@@ -180,6 +194,58 @@ function SuiteElevenFuncOne(request,reply) {
 function SuiteElevenFuncTwo(request,reply) {
 	return new Promise(function(resolve,reject){
 		resolve();
+	});
+}
+
+function SuiteTwelveFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reply.data += ' new';
+			resolve();
+		},100);		
+	});
+}
+
+function SuiteTwelveFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reply.data = 'something';
+			resolve();
+		},10);		
+	});
+}
+
+function SuiteTwelveFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reply.data += ' new';
+			resolve();
+		},100);		
+	});
+}
+
+function SuiteTwelveFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reply.data = 'something';
+			resolve();
+		},10);		
+	});
+}
+
+function SuiteThirteenFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reject(boom.conflict('Error from function one'));
+		},100);		
+	});
+}
+
+function SuiteThirteenFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			resolve();
+		},10);		
 	});
 }
 

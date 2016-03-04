@@ -268,6 +268,71 @@ describe('Series Test Suite for Background Chain', function() {
 	});
 });
 
+describe('Series Test Suite for Parallel Chain', function() {
+	
+	beforeEach(function(done) {
+		
+		response = null;
+
+		request = function() {
+
+		};
+
+		reply = function(data) {
+			response = data;
+		};
+
+		done();
+
+	});
+
+	it('should exeute functions in parallel and update response',function(done){
+
+		this.timeout(600);
+
+		var funcArray = [
+			mockFunc.testSuiteTwelve.one,
+			mockFunc.testSuiteTwelve.two
+		];
+
+		var series = new Series(funcArray);
+		series.parallel(request,reply);
+
+		setTimeout(function(){
+			response.should.not.equal(undefined);
+			response.should.equal('something new');
+			done();			
+		},500)
+
+
+	});
+
+	it('should handle boom error if one of the functions fail',function(done){
+
+		this.timeout(600);
+
+		var funcArray = [
+			mockFunc.testSuiteThirteen.one,
+			mockFunc.testSuiteThirteen.two
+		];
+
+		var series = new Series(funcArray);
+		series.parallel(request,reply);
+
+		setTimeout(function(){
+			response.should.not.equal(undefined);
+			response.isBoom.should.equal(true);
+			response.output.statusCode.should.equal(409);
+			response.output.payload.message.should.equal('Error from function one');
+			done();			
+		},500)
+
+
+	});
+
+
+})
+
 
 
 

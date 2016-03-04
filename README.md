@@ -138,6 +138,8 @@ function processSomeData(request,reply) {
 
 **series.background(request,reply)** Starts invoking functions and immediately sents back a success response without waiting for any of the function to execute. Ideal for initiating background jobs that do not require monitoring.
 
+**series.parallel(request,reply)** Works similar to .background() except that each function in the chain must return a promise and the response is sent only when all of the functions have resolved succesfully. 
+
 #### What about reply() ?
 
 You're free to call reply() anywhere in the function chain. This will just stop calling the next function in the chain and send the response directly to the client. hapi-next **DOES NOT** overrides the `reply()` method. 

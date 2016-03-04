@@ -160,6 +160,61 @@ Series.prototype.background = function(request,reply) {
 	});
 };
 
+Series.prototype.parallel = function(request,reply) {
+
+	if(!request) {
+		throw new Error('Request can\'t be empty.');
+		return;
+	}
+
+	if(!reply) {
+		throw new Error('Reply can\'t be empty.');
+		return;
+	}
+
+	var arr = this.arr,
+			self = this,
+			funcArray = [],
+			currInvocation,
+			reqErrObj;
+
+	for(var i=0; i< arr.length; i++) {
+		funcArray.push((function(currFunc,request,reply){
+			return function(cb){
+
+				currInvocation = currFunc.call({},request,reply);
+
+				if(!currInvocation.then || !currInvocation.catch) {
+					cb();
+					return;
+				}
+
+				currInvocation.then(function(){
+					cb();
+				})
+				.catch(function(err){
+					cb(err);
+				});
+
+			}
+		})(arr[i],request,reply));
+	}
+
+	async.parallel(funcArray,function(err,results) {
+
+		if(err) {
+			reply(self.error(err));
+			return;	
+		}
+
+		reply.data = reply.data || defaultData;
+		reply(reply.data);
+		reply.data = {};
+		previousData = null;
+
+	});
+};
+
 Series.prototype.merge = function(base,derived) {
 	
 	derived = derived || {};
