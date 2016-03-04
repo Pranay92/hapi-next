@@ -134,8 +134,9 @@ function processSomeData(request,reply) {
 
 **series.execute(request,reply)**  Executes all the functions in sequence and the response is sent back only once the last function in the series execute OR if any of them fails due to error. Ideal for apis where sequence of the function execution matters.
 
-**series.background(request,reply)** Starts invoking functions and immediately sents back a success response without waiting for any of the function to execute. Ideal for initiating background jobs that do not require monitoring.
+**series.promise(request,reply)** Works similar to .execute() except that each function in the chain must return a promise and the next function in the chain is executed only once the previous one resolves.
 
+**series.background(request,reply)** Starts invoking functions and immediately sents back a success response without waiting for any of the function to execute. Ideal for initiating background jobs that do not require monitoring.
 
 #### What about reply() ?
 
