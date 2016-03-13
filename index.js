@@ -95,6 +95,7 @@ Series.prototype.execute = function(request,reply) {
 
 	var arr = this.arr,
 			self = this,
+			finalized = false,
 			reqErrObj;
 
 	async.series(arr.map(function(func) {
@@ -102,6 +103,10 @@ Series.prototype.execute = function(request,reply) {
 			
 			reply.next = function(err) {
 				
+				if(finalized) {
+					return;
+				}
+
 				if(err) {
 					return cb(err);
 				}
@@ -109,12 +114,18 @@ Series.prototype.execute = function(request,reply) {
 				cb();
 			};
 
+			reply.finalize = function(data) {
+				reply.data = data;
+				cb('__hapi__next__success');
+				finalized = true;
+			};
+
 			func.call({},request,reply);
 
 		}
 	}),function(err,results) {
 
-		if(err) {
+		if(err && err !== '__hapi__next__success') {
 			reply(self.error(err));
 			return;
 		}
