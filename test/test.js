@@ -114,6 +114,18 @@ describe('Series Test Suite for Execute', function() {
 		done();
 	});
 
+	it('should return response back from function one', function(done) {
+
+		var funcArray = mockFunc.execute.seven;
+
+		var series = new Series(funcArray);
+		series.execute(request,reply);
+		response.should.not.equal(undefined);
+		response.should.equal('this should be the final data');
+		done();
+
+	});
+
 
 });
 
@@ -275,7 +287,7 @@ describe('Series Test Suite for Parallel Chain', function() {
 		this.timeout(600);
 
 		var funcArray = mockFunc.parallel.two;
-		
+
 		var series = new Series(funcArray);
 		series.parallel(request,reply);
 

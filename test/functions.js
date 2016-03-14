@@ -36,6 +36,11 @@ module.exports = {
 		'six' : [
 			ExecuteSixFuncOne,
 			ExecuteSixFuncTwo
+		],
+
+		'seven' : [
+			ExecuteSevenFuncOne,
+			ExecuteSevenFuncTwo
 		]
 
 	},
@@ -154,6 +159,17 @@ function ExecuteSixFuncOne(request,reply) {
 
 function ExecuteSixFuncTwo(request,reply) {
 	reply.next(boom.notFound('Unknown Product'));
+};
+
+function ExecuteSevenFuncOne(request,reply) {
+	reply.data = 'this will be overriden';
+	reply.finalize('this should be the final data');
+	reply.next(); // calling this now wouldn't do anything
+};
+
+function ExecuteSevenFuncTwo(request,reply) {
+	reply.data = 'added from function two';
+	reply.next();
 };
 
 // Promise function definitions from here
