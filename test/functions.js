@@ -6,246 +6,250 @@ module.exports = {
 	/*
 		Test suites for Execute chain
 	*/
-	testSuiteOne : {
-		one : SuiteOneFuncOne,
-		two : SuiteOneFuncTwo
-	},
+	'execute' : {
 
-	testSuiteTwo : {
-		one : SuiteTwoFuncOne,
-		two : SuiteTwoFuncTwo
-	},
+		'one' : [
+			ExecuteOneFuncOne,
+			ExecuteOneFuncTwo
+		],
 
-	testSuiteThree : {
-		one : SuiteThreeFuncOne,
-		two : SuiteThreeFuncTwo
-	},
+		'two' : [
+			ExecuteTwoFuncOne,
+			ExecuteTwoFuncTwo
+		],
 
-	testSuiteFour : {
-		one : SuiteFourFuncOne,
-		two : SuiteFourFuncTwo,
-	},
+		'three' : [
+			ExecuteThreeFuncOne,
+			ExecuteThreeFuncTwo
+		],
 
-	testSuiteFive : {
-		one : SuiteFiveFuncOne,
-		two : SuiteFiveFuncTwo
+		'four' : [
+			ExecuteFourFuncOne,
+			ExecuteFourFuncTwo
+		],
+
+		'five' : [
+			ExecuteFiveFuncOne,
+			ExecuteFiveFuncTwo
+		],
+
+		'six' : [
+			ExecuteSixFuncOne,
+			ExecuteSixFuncTwo
+		]
+
 	},
 
 	/*
 		Test suites for Promise chain
 	*/
 
-	testSuiteSix : {
-		one : SuiteSixFuncOne,
-		two : SuiteSixFuncTwo
-	},
+	'promise' : {
 
-	testSuiteSeven : {
-		one : SuiteSevenFuncOne,
-		two : SuiteSevenFuncTwo
+		'one' : [
+			PromiseOneFuncOne,
+			PromiseOneFuncTwo
+		],
+
+		'two' : [
+			PromiseTwoFuncOne,
+			PromiseTwoFuncTwo
+		],
+
+		'three' : [
+			PromiseThreeFuncOne,
+			PromiseThreeFuncTwo
+		]
+
 	},
 
 	/*
 		Test suites for Background chain
 	*/
 
-	testSuiteEight : {
-		one : SuiteEightFuncOne,
-		two : SuiteEightFuncTwo
-	},
+	'background' : {
 
-	testSuiteNine : {
-		one : SuiteNineFuncOne,
-		two : SuiteNineFuncTwo
-	},
+		'one' : [
+			BackgroundOneFuncOne,
+			BackgroundOneFuncTwo
+		],
 
-	testSuiteTen : {
-		one : SuiteTenFuncOne,
-		two : SuiteTenFuncTwo
-	},
+		'two' : [
+			BackgroundTwoFuncOne,
+			BackgroundTwoFuncTwo
+		]
 
-	testSuiteEleven : {
-		one : SuiteElevenFuncOne,
-		two : SuiteElevenFuncTwo
 	},
 
 	/*
 		Test suites for parallel chain
 	*/
 
-	testSuiteTwelve : {
-		one : SuiteTwelveFuncOne,
-		two : SuiteTwelveFuncTwo
-	},
+	'parallel' : {
 
-	testSuiteThirteen : {
-		one : SuiteThirteenFuncOne,
-		two : SuiteThirteenFuncTwo
+		'one' : [
+			ParallelOneFuncOne,
+			ParallelOneFuncTwo
+		],
+
+		'two' : [
+			ParallelTwoFuncOne,
+			ParallelTwoFuncTwo
+		]
+
 	}
 
 };
 
+// Execute function definitions from here
 
-function SuiteOneFuncOne(request,reply) {
+function ExecuteOneFuncOne(request,reply) {
 	reply.next();
 }
 
 
-function SuiteOneFuncTwo(request,reply) {
+function ExecuteOneFuncTwo(request,reply) {
 	reply.data = 'Sent from test function';
 	reply.next();
 }
 
-function SuiteTwoFuncOne(request,reply) {
+function ExecuteTwoFuncOne(request,reply) {
 	reply.next();
 };
 
-function SuiteTwoFuncTwo(request,reply) {
+function ExecuteTwoFuncTwo(request,reply) {
 	reply.next({message : 'Thrown from the server!', status : 422});
 };
 
-function SuiteThreeFuncOne(request,reply) {
+function ExecuteThreeFuncOne(request,reply) {
 	reply.data = '11';
 	reply.next();
 };
 
-function SuiteThreeFuncTwo(request,reply) {
+function ExecuteThreeFuncTwo(request,reply) {
 	reply.data += '22';
 	reply.next();
 };
 
-function SuiteFourFuncOne(request,reply) {
+function ExecuteFourFuncOne(request,reply) {
 	reply.data = 'something';
 	reply.next();
 };
 
-function SuiteFourFuncTwo(request,reply) {
+function ExecuteFourFuncTwo(request,reply) {
 	reply.next({message : 'Unauthorized',status : 401});
 };
 
-function SuiteFiveFuncOne(request,reply) {
+function ExecuteFiveFuncOne(request,reply) {
 	reply.next();
 };
 
-function SuiteFiveFuncTwo(request,reply) {
+function ExecuteFiveFuncTwo(request,reply) {
 	reply.next({message : 'Internal Server Error',status : 500});
 };
 
-function SuiteSixFuncOne(request,reply) {
+function ExecuteSixFuncOne(request,reply) {
+	reply.next();
+}
+
+function ExecuteSixFuncTwo(request,reply) {
+	reply.next(boom.notFound('Unknown Product'));
+};
+
+// Promise function definitions from here
+
+function PromiseOneFuncOne(request,reply) {
 	return new Promise(function(resolve,reject) {
 		var data = 'Passed from function one';
 		resolve(data);
 	});
 };
 
-function SuiteSixFuncTwo(request,reply) {
+function PromiseOneFuncTwo(request,reply) {
 	reply.data += ' and merged with function two';
 	return new Promise(function(resolve,reject) {
 		resolve(reply.data);
 	});
 };
 
-function SuiteSevenFuncOne(request,reply) {
+function PromiseTwoFuncOne(request,reply) {
 	return new Promise(function(resolve,reject){
 		reject({message : 'Error from function one',status : 422});
 	});
 };
 
-function SuiteSevenFuncTwo(request,reply) {
+function PromiseTwoFuncTwo(request,reply) {
 	return new Promise(function(resolve,reject){
 		resolve();
 	});
 };
 
+function PromiseThreeFuncOne(request,reply) {
+	return new Promise(function(resolve,reject){
+		reject(boom.conflict('Error from function one'));
+	});
+};
 
-function SuiteEightFuncOne(request,reply){
+function PromiseThreeFuncTwo(request,reply) {
+	return new Promise(function(resolve,reject){
+		resolve();
+	});
+};
+
+// Background function definitions from here
+
+function BackgroundOneFuncOne(request,reply){
 	reply.next();
 };
 
-function SuiteEightFuncTwo(request,reply){
+function BackgroundOneFuncTwo(request,reply){
 	setTimeout(function(){
 		reply.data = {'msg' : 'Changed in the background functions'};
 	},2000)
 };
 
-function SuiteNineFuncOne(request,reply){
+function BackgroundTwoFuncOne(request,reply){
 	reply.next();
 };
 
-function SuiteNineFuncTwo(request,reply){
+function BackgroundTwoFuncTwo(request,reply){
 	reply.data = {'msg' : 'something new'};
 	reply.next();
 };
 
-function SuiteTenFuncOne(request,reply) {
-	reply.next();
-}
+// Parallel function definitions start here
 
-function SuiteTenFuncTwo(request,reply) {
-	reply.next(boom.notFound('Unknown Product'));
-}
-
-function SuiteElevenFuncOne(request,reply) {
-	return new Promise(function(resolve,reject){
-		reject(boom.conflict('Error from function one'));
-	});
-}
-
-function SuiteElevenFuncTwo(request,reply) {
-	return new Promise(function(resolve,reject){
-		resolve();
-	});
-}
-
-function SuiteTwelveFuncOne(request,reply) {
+function ParallelOneFuncOne(request,reply) {
 	return new Promise(function(resolve,reject){
 		setTimeout(function(){
 			reply.data += ' new';
 			resolve();
 		},100);		
 	});
-}
+};
 
-function SuiteTwelveFuncTwo(request,reply) {
+function ParallelOneFuncTwo(request,reply) {
 	return new Promise(function(resolve,reject){
 		setTimeout(function(){
 			reply.data = 'something';
 			resolve();
 		},10);		
 	});
-}
+};
 
-function SuiteTwelveFuncOne(request,reply) {
-	return new Promise(function(resolve,reject){
-		setTimeout(function(){
-			reply.data += ' new';
-			resolve();
-		},100);		
-	});
-}
-
-function SuiteTwelveFuncTwo(request,reply) {
-	return new Promise(function(resolve,reject){
-		setTimeout(function(){
-			reply.data = 'something';
-			resolve();
-		},10);		
-	});
-}
-
-function SuiteThirteenFuncOne(request,reply) {
+function ParallelTwoFuncOne(request,reply) {
 	return new Promise(function(resolve,reject){
 		setTimeout(function(){
 			reject(boom.conflict('Error from function one'));
 		},100);		
 	});
-}
+};
 
-function SuiteThirteenFuncTwo(request,reply) {
+function ParallelTwoFuncTwo(request,reply) {
 	return new Promise(function(resolve,reject){
 		setTimeout(function(){
 			resolve();
 		},10);		
 	});
-}
+};
 

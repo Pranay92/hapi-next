@@ -29,10 +29,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should execute all functions', function(done) {
 		
-		var funcArray = [
-			mockFunc.testSuiteOne.one,
-			mockFunc.testSuiteOne.two
-		];
+		var funcArray = mockFunc.execute.one;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -43,10 +40,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should return error as a reply', function(done) {
 
-		var funcArray = [
-			mockFunc.testSuiteTwo.one,
-			mockFunc.testSuiteTwo.two
-		];
+		var funcArray = mockFunc.execute.two;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -61,7 +55,6 @@ describe('Series Test Suite for Execute', function() {
 	it('should throw error', function(done) {
 
 		var funcArray = [
-			mockFunc.testSuiteOne.one,
 			mockFunc.nonExistentFunc
 		];
 
@@ -74,10 +67,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should pass data in between functions', function(done) {
 
-		var funcArray = [
-			mockFunc.testSuiteThree.one,
-			mockFunc.testSuiteThree.two
-		];
+		var funcArray = mockFunc.execute.three;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -87,10 +77,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should throw unauthorized status code', function(done) {
 
-		var funcArray = [
-			mockFunc.testSuiteFour.one,
-			mockFunc.testSuiteFour.two
-		];
+		var funcArray = mockFunc.execute.four;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -103,10 +90,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should throw internal server error', function(done) {
 
-		var funcArray = [
-			mockFunc.testSuiteFive.one,
-			mockFunc.testSuiteFive.two
-		];
+		var funcArray = mockFunc.execute.five;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -119,10 +103,7 @@ describe('Series Test Suite for Execute', function() {
 
 	it('should throw boom error when passing a boom error', function(done) {
 
-		var funcArray = [
-			mockFunc.testSuiteTen.one,
-			mockFunc.testSuiteTen.two
-		];
+		var funcArray = mockFunc.execute.six;
 
 		var series = new Series(funcArray);
 		series.execute(request,reply);
@@ -159,10 +140,7 @@ describe('Series Test Suite for Promise', function() {
 		
 		this.timeout(2000);
 
-		var funcArray = [
-			mockFunc.testSuiteSix.one,
-			mockFunc.testSuiteSix.two
-		];
+		var funcArray = mockFunc.promise.one;
 
 		var series = new Series(funcArray);
 		series.promise(request,reply);
@@ -177,10 +155,7 @@ describe('Series Test Suite for Promise', function() {
 		
 		this.timeout(2000);
 
-		var funcArray = [
-			mockFunc.testSuiteSeven.one,
-			mockFunc.testSuiteSeven.two
-		];
+		var funcArray = mockFunc.promise.two;
 
 		var series = new Series(funcArray);
 		series.promise(request,reply);
@@ -198,10 +173,7 @@ describe('Series Test Suite for Promise', function() {
 
 		this.timeout(2000);
 
-		var funcArray = [
-			mockFunc.testSuiteEleven.one,
-			mockFunc.testSuiteEleven.two
-		];
+		var funcArray = mockFunc.promise.three;
 
 		var series = new Series(funcArray);
 		series.promise(request,reply);
@@ -237,10 +209,7 @@ describe('Series Test Suite for Background Chain', function() {
 
 	it('should not change the reply object',function(done){
 
-		var funcArray = [
-			mockFunc.testSuiteEight.one,
-			mockFunc.testSuiteEight.two
-		];
+		var funcArray = mockFunc.background.one;
 
 		var series = new Series(funcArray);
 		series.background(request,reply);
@@ -253,10 +222,7 @@ describe('Series Test Suite for Background Chain', function() {
 
 	it('should change the reply object',function(done){
 
-		var funcArray = [
-			mockFunc.testSuiteNine.one,
-			mockFunc.testSuiteNine.two
-		];
+		var funcArray = mockFunc.background.two;
 
 		var series = new Series(funcArray);
 		series.background(request,reply);
@@ -290,10 +256,7 @@ describe('Series Test Suite for Parallel Chain', function() {
 
 		this.timeout(600);
 
-		var funcArray = [
-			mockFunc.testSuiteTwelve.one,
-			mockFunc.testSuiteTwelve.two
-		];
+		var funcArray = mockFunc.parallel.one;
 
 		var series = new Series(funcArray);
 		series.parallel(request,reply);
@@ -311,11 +274,8 @@ describe('Series Test Suite for Parallel Chain', function() {
 
 		this.timeout(600);
 
-		var funcArray = [
-			mockFunc.testSuiteThirteen.one,
-			mockFunc.testSuiteThirteen.two
-		];
-
+		var funcArray = mockFunc.parallel.two;
+		
 		var series = new Series(funcArray);
 		series.parallel(request,reply);
 
