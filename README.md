@@ -20,7 +20,7 @@ Module that allows to inject next() in your route handler
 
 Consider the following route handler in hapi:
 
-```
+```js
 handler : function(request, reply) {
     controller.someFunc();
 }
@@ -29,7 +29,7 @@ handler : function(request, reply) {
 
 and in the controller: 
 
-```
+```js
 someFunc : function(request,reply) {
 
     validator.validate(request) 
@@ -76,13 +76,13 @@ Frameworks like *Express.JS* have a beautiful feature called **next()** that all
 **hapi-next** can be used in the following way
 
 Require `hapi-next`
-```
+```js
 var Series = require('hapi-next');
 ```
 
 and in the handler
 
-```
+```js
 handler : function(request,reply) {
     
     var funcArray = [
@@ -99,7 +99,7 @@ handler : function(request,reply) {
 
 your functions:
 
-```
+```js
 function validate(request,reply) {
   reply.next();
 }
