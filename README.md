@@ -130,6 +130,8 @@ function processSomeData(request,reply) {
 
 **reply.data** Object used to pass data between functions in the chain. (see function signature in the above example). This defaults to object ````{success : true}````. 
 
+**reply.finalize(data)** Method to break the series chain and send the response direclty. Available ONLY on ````series.execute```` and since version **0.7.0** onwards.
+
 ### Series chains
 
 **series.execute(request,reply)**  Executes all the functions in sequence and the response is sent back only once the last function in the series execute OR if any of them fails due to error. Ideal for apis where sequence of the function execution matters.
@@ -147,5 +149,6 @@ You're free to call reply() anywhere in the function chain. This will just stop 
 ### TODO
 
 ~~1. Add `Series.background()` to make functions execute in parallel that are independent and can immediately send a response.~~    
+
 2. Add a method to **get** and **set** properties of **reply.data** instead of overwriting it on every function invocation.
 
