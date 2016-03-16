@@ -160,7 +160,7 @@ describe('Series Test Suite for Promise', function() {
 		setTimeout(function() {
 			response.should.equal('Passed from function one and merged with function two');
 			done();
-		},50)
+		},50);
 	});
 
 	it('should return error', function(done) {
@@ -277,7 +277,7 @@ describe('Series Test Suite for Parallel Chain', function() {
 			response.should.not.equal(undefined);
 			response.should.equal('something new');
 			done();			
-		},500)
+		},500);
 
 
 	});
@@ -297,7 +297,7 @@ describe('Series Test Suite for Parallel Chain', function() {
 			response.output.statusCode.should.equal(409);
 			response.output.payload.message.should.equal('Error from function one');
 			done();			
-		},500)
+		},500);
 
 
 	});

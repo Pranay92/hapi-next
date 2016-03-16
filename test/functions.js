@@ -48,7 +48,6 @@ module.exports = {
 	/*
 		Test suites for Promise chain
 	*/
-
 	'promise' : {
 
 		'one' : [
@@ -71,7 +70,6 @@ module.exports = {
 	/*
 		Test suites for Background chain
 	*/
-
 	'background' : {
 
 		'one' : [
@@ -89,7 +87,6 @@ module.exports = {
 	/*
 		Test suites for parallel chain
 	*/
-
 	'parallel' : {
 
 		'one' : [
